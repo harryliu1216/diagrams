@@ -3,6 +3,7 @@ import { Menu, Avatar, Input, Space, Button } from '@arco-design/web-react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
 import { IconSearch } from '@arco-design/web-react/icon';
+import Search from '@/components/Search';
 
 const MenuItem = Menu.Item;
 
@@ -31,13 +32,7 @@ export default function LayoutComponent() {
               <Link to="/">发布</Link>
             </MenuItem>
           </Menu>
-          <Input
-            prefix={<IconSearch />}
-            style={{ width: 550, marginTop: 3 }}
-            allowClear
-            placeholder="Search"
-            size="large"
-          />
+          <Search />
           <Space>
             <Button type="primary">导入</Button>
             <Avatar size={32}>A</Avatar>
