@@ -8,6 +8,8 @@ const MenuItem = Menu.Item;
 
 export default function LayoutComponent() {
   document.body.setAttribute('arco-theme', 'dark');
+  const { pathname } = window.location;
+
   return (
     <div className={styles['layout']}>
       <div className={styles['header']}>
@@ -24,10 +26,10 @@ export default function LayoutComponent() {
             <MenuItem key="2">
               <Link to="/">策略</Link>
             </MenuItem>
-            <MenuItem key="3">
+            <MenuItem key="package">
               <Link to="/package">打包</Link>
             </MenuItem>
-            <MenuItem key="4">
+            <MenuItem key="publish">
               <Link to="/publish">发布</Link>
             </MenuItem>
           </Menu>
