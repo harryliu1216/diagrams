@@ -2,7 +2,7 @@ import { Link, Outlet } from 'umi';
 import { Menu, Avatar, Input, Space, Button } from '@arco-design/web-react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
-import { IconSearch } from '@arco-design/web-react/icon';
+import { IconSearch, IconUpload } from '@arco-design/web-react/icon';
 
 const MenuItem = Menu.Item;
 
@@ -25,10 +25,10 @@ export default function LayoutComponent() {
               <Link to="/">策略</Link>
             </MenuItem>
             <MenuItem key="3">
-              <Link to="/">打包</Link>
+              <Link to="/package">打包</Link>
             </MenuItem>
             <MenuItem key="4">
-              <Link to="/">发布</Link>
+              <Link to="/publish">发布</Link>
             </MenuItem>
           </Menu>
           <Input
@@ -38,8 +38,10 @@ export default function LayoutComponent() {
             placeholder="Search"
             size="large"
           />
-          <Space>
-            <Button type="primary">导入</Button>
+          <Space size="medium">
+            <Button type="primary" icon={<IconUpload />}>
+              导入
+            </Button>
             <Avatar size={32}>A</Avatar>
           </Space>
         </div>

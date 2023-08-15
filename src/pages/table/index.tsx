@@ -53,7 +53,7 @@ const generateTableData = (data: any[], tableName: string) => {
   return { columns, data: datasource };
 };
 
-export default function HomePage() {
+export default function TablePage() {
   const treeData = generateTreeData(data);
 
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
