@@ -20,7 +20,6 @@ const nodeTypes = {
   FieldList: FieldList,
   List: List
 };
-1;
 
 const generateTreeData = (data: any[]) => {
   return data.map((item) => {

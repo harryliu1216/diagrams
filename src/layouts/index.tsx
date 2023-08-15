@@ -1,15 +1,18 @@
-import { Link, Outlet } from 'umi';
+import { Link, Outlet, useLocation } from 'umi';
 import { Menu, Avatar, Input, Space, Button } from '@arco-design/web-react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
 
 import Search from '@/components/Search';
+import { IconSettings } from '@arco-design/web-react/icon';
 
 const MenuItem = Menu.Item;
 
 export default function LayoutComponent() {
   document.body.setAttribute('arco-theme', 'dark');
-  const { pathname } = window.location;
+  const location = useLocation();
+
+  const selectedKeys = [location.pathname || '/'];
 
   return (
     <div className={styles['layout']}>
@@ -19,24 +22,28 @@ export default function LayoutComponent() {
           <Menu
             mode="horizontal"
             style={{ background: 'transparent', width: 400, height: 58 }}
-            defaultSelectedKeys={['1']}
+            selectedKeys={selectedKeys}
           >
-            <MenuItem key="1">
+            <MenuItem key="/">
               <Link to="/">数据表</Link>
             </MenuItem>
-            <MenuItem key="2">
+            {/* <MenuItem key="/1">
               <Link to="/">策略</Link>
+            </MenuItem> */}
+            <MenuItem key="/workflow">
+              <Link to="/workflow">工作流</Link>
             </MenuItem>
-            <MenuItem key="package">
+            <MenuItem key="/package">
               <Link to="/package">打包</Link>
             </MenuItem>
-            <MenuItem key="publish">
+            <MenuItem key="/publish">
               <Link to="/publish">发布</Link>
             </MenuItem>
           </Menu>
           <Search />
-          <Space>
+          <Space size={'medium'} align="center">
             <Button type="primary">导入</Button>
+            <IconSettings fontSize={18} />
             <Avatar size={32}>A</Avatar>
           </Space>
         </div>
