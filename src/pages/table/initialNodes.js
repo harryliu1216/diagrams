@@ -122,17 +122,17 @@ export const nodes = [
     data: {
       title: '技能表',
       list: [
-        { key: 'name', label: '名称', handleId: 'college' },
-        { key: 'info', label: '信息', handleId: 'college' },
-        { key: 'type', label: '类型', handleId: 'college' },
-        { key: 'typeName', label: '类型名称', handleId: 'college' },
-        { key: 'rare', label: '品质', handleId: 'college' },
-        { key: 'isToTarget', label: '是否技能有指定目标', handleId: 'college' },
-        { key: 'isRemote', label: '是否远程技能', handleId: 'college' },
-        { key: 'skillType', label: '技能类型', handleId: 'college' },
-        { key: 'skillTypeInfo', label: '技能类型名称', handleId: 'college' },
-        { key: 'propTypeId', label: '技能属性', handleId: 'college' },
-        { key: 'attribute', label: '加成属性', handleId: 'college' }
+        { key: 'name', label: '名称', handleId: 'name' },
+        { key: 'info', label: '信息', handleId: 'info' },
+        { key: 'type', label: '类型', handleId: 'type' },
+        { key: 'typeName', label: '类型名称', handleId: 'typeName' },
+        { key: 'rare', label: '品质', handleId: 'rare' },
+        { key: 'isToTarget', label: '是否技能有指定目标', handleId: 'isToTarget' },
+        { key: 'isRemote', label: '是否远程技能', handleId: 'isRemote' },
+        { key: 'skillType', label: '技能类型', handleId: 'skillType' },
+        { key: 'skillTypeInfo', label: '技能类型名称', handleId: 'skillTypeInfo' },
+        { key: 'propTypeId', label: '技能属性', handleId: 'propTypeId' },
+        { key: 'attribute', label: '加成属性', handleId: 'attribute' }
       ]
     },
     position: { x: 640, y: 200 },
@@ -144,10 +144,10 @@ export const nodes = [
     data: {
       title: 'Buff',
       list: [
-        { key: 'name', label: '名称', handleId: 'college' },
-        { key: 'buffType', label: '类型', handleId: 'college' },
-        { key: 'buffSubType', label: '子类型', handleId: 'college' },
-        { key: 'triggerValue', label: '触发值', handleId: 'college' }
+        { key: 'name', label: '名称', handleId: 'name' },
+        { key: 'buffType', label: '类型', handleId: 'collebuffTypege' },
+        { key: 'buffSubType', label: '子类型', handleId: 'buffSubType' },
+        { key: 'triggerValue', label: '触发值', handleId: 'triggerValue' }
       ]
     },
     position: { x: 400, y: 405 },
@@ -159,11 +159,11 @@ export const nodes = [
     data: {
       title: '七日任务',
       list: [
-        { key: 'name', label: '名称', handleId: 'college' },
-        { key: 'info', label: '任务详情', handleId: 'college' },
-        { key: 'taskTyp', label: '任务类型', handleId: 'college' },
-        { key: 'taskValue', label: '任务需求', handleId: 'college' },
-        { key: 'isLogin', label: '是否登陆', handleId: 'college' }
+        { key: 'name', label: '名称', handleId: 'name' },
+        { key: 'info', label: '任务详情', handleId: 'info' },
+        { key: 'taskTyp', label: '任务类型', handleId: 'taskTyp' },
+        { key: 'taskValue', label: '任务需求', handleId: 'taskValue' },
+        { key: 'isLogin', label: '是否登陆', handleId: 'isLogin' }
       ]
     },
     position: { x: 650, y: 555 },

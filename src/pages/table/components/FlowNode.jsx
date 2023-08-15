@@ -10,7 +10,7 @@ function FieldList({ id, data }) {
       <div className={styles['title']}>{title}</div>
       {list.map(({ handleId, label, key }) => {
         return (
-          <div key={handleId}>
+          <div key={handleId} style={{ position: 'relative' }}>
             <div className={styles.row}>
               <span>{key}</span>
               <span className={styles.label} title={label}>
@@ -21,7 +21,7 @@ function FieldList({ id, data }) {
             <Handle
               type="source"
               position={Position.Right}
-              style={{ right: 5, visibility: 'hidden' }}
+              style={{ right: 5, visibility: 'hidden', top: '50%', }}
               id={handleId}
             />
           </div>

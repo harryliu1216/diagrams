@@ -1,0 +1,35 @@
+.mask {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, .45);
+  z-index: 100;
+  backdrop-filter: blur(4px);
+
+  .close {
+    position: absolute;
+    right: 1em;
+    top: 1rem;
+    font-size: 32px;
+    color: rgb(244, 244, 244);
+  }
+
+  .input {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, 0);
+
+    :global {
+      .arco-input-inner-wrapper {
+        border-radius: 6px;
+      }
+
+      .arco-input {
+        font-size: 18px;
+      }
+    }
+  }
+}
