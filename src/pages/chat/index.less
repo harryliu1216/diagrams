@@ -1,0 +1,58 @@
+.card {
+  background-color: #232324;
+  padding: 12px;
+  border-radius: 4px;
+  box-shadow: hsla(0, 0%, 100%, 0.01) 0px 4px 7px 0px;
+  border: 1px solid rgba(63, 63, 70, 0.27);
+
+  height: 100%;
+}
+
+.chat {
+  &-content {
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
+    padding-top: 12px;
+  }
+  &-record {
+    max-width: 800px;
+    width: 80%;
+    margin: 0 auto;
+
+    &-row {
+      margin-bottom: 24px;
+      display: flex;
+
+      &.send {
+        .chat-record-name {
+          order: 3;
+          margin-left: 18px;
+          margin-right: 0;
+        }
+      }
+    }
+    &-name {
+      margin-right: 18px;
+      font-weight: 400;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    &-content {
+    }
+  }
+}
+
+.input-wrapper {
+  position: absolute;
+  bottom: 30px;
+  max-width: 800px;
+  width: 80%;
+  left: 50%;
+  margin-left: -400px;
+  .send-btn {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+  }
+}
