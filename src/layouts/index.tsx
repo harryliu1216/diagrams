@@ -2,6 +2,7 @@ import { Link, Outlet } from 'umi';
 import { Menu, Radio } from '@arco-design/web-react';
 import "@arco-design/web-react/dist/css/arco.css";
 import styles from './index.less';
+import Search from '@/components/Search';
 
 
 const MenuItem = Menu.Item
@@ -17,6 +18,8 @@ export default function LayoutComponent() {
           <MenuItem key='2'><Link to='/'>策略</Link></MenuItem>
           <MenuItem key='3'><Link to='/'>发布</Link></MenuItem>
         </Menu>
+
+        <Search />
 
       </div>
       <div style={{ position: 'relative', height: '100%' }}>

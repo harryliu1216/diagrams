@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import "@arco-design/web-react/dist/css/arco.css";
+import { useState } from "react";
 import styles from './index.less'
 import ReactFlow, { Background, Controls, MiniMap, useEdgesState, useNodesState } from 'reactflow';
 import { nodes as initialNodes, edges as initialEdges, data } from './initialNodes';
 import { FieldList, List } from './CustomerNode';
 import { Tree, Radio, Layout, Table } from '@arco-design/web-react';
-import { IconStorage } from '@arco-design/web-react/icon';
+
+import "@arco-design/web-react/dist/css/arco.css";
 import 'reactflow/dist/style.css';
-import { column } from "@/lib/gojs/extensionsTS/DrawCommandHandlerScript";
 
 const RadioGroup = Radio.Group
 const Sider = Layout.Sider
@@ -20,7 +19,7 @@ const minimapStyle = {
 const nodeTypes = {
   FieldList: FieldList,
   List: List
-}; 1
+};
 
 const generateTreeData = (data: any[]) => {
   return data.map(item => {
@@ -63,7 +62,6 @@ export default function HomePage() {
     updateSelectedKeys(keys.map(item => item.split('-')[0]))
   }
   const tableData = generateTableData(data, selectedKeys[0])
-  console.log(tableData)
 
   return (
     <>

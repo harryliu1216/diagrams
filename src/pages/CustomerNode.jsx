@@ -1,9 +1,5 @@
-import React, { memo } from 'react';
-import { Handle, useReactFlow, useStoreApi, Position } from 'reactflow';
-import { Card } from '@arco-design/web-react';
+import { Handle, Position } from 'reactflow';
 import styles from './index.less'
-
-
 
 function FieldList({ id, data }) {
   const { list, title } = data
