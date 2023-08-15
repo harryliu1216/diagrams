@@ -1,4 +1,4 @@
-import { Layout, Button, Table, Radio, Avatar, Input } from '@arco-design/web-react';
+import { Layout, Button, Table, Radio, Avatar, Input, Mentions } from '@arco-design/web-react';
 import { IconSend } from '@arco-design/web-react/icon';
 import styles from './index.less';
 
@@ -43,7 +43,13 @@ export default function ChatPage() {
             </div>
           </div>
           <div className={styles['input-wrapper']}>
-            <Input className={styles.input} placeholder="发送消息" height={48} />
+            <Mentions
+              className={styles.input}
+              placeholder="发送消息"
+              height={48}
+              prefix="/"
+              options={['查询 ', '创建记录 ', '打包 ']}
+            />
             <IconSend className={styles['send-btn']} fontSize={26} />
           </div>
         </div>
