@@ -150,7 +150,7 @@ export const nodes = [
         { key: 'triggerValue', label: '触发值', handleId: 'triggerValue' }
       ]
     },
-    position: { x: 400, y: 605 },
+    position: { x: 400, y: 405 },
     targetPosition: Position.Left
   },
   {
@@ -166,7 +166,7 @@ export const nodes = [
         { key: 'isLogin', label: '是否登陆', handleId: 'isLogin' }
       ]
     },
-    position: { x: 650, y: 575 },
+    position: { x: 650, y: 555 },
     targetPosition: Position.Left
   }
 ];

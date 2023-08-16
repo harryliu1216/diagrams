@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useRef, useState } from "react"
 import { AutoComplete, Input } from "@arco-design/web-react"
 import { IconSearch, IconClose } from '@arco-design/web-react/icon';
-import styles from './index.less'
-import { OptionInfo } from "@arco-design/web-react/es/Select/interface";
+import styles from './index.less';
+import { OptionInfo } from '@arco-design/web-react/es/Select/interface';
 
 const { Option } = AutoComplete;
 
@@ -13,13 +13,13 @@ function Search() {
 
   useEffect(() => {
     if (visible && autoCompleteRef.current) {
-      autoCompleteRef.current.dom.focus()
+      autoCompleteRef.current.dom.focus();
     }
-  }, [visible])
+  }, [visible]);
 
   const handleVisible = () => {
-    updateVisible(!visible)
-  }
+    updateVisible(!visible);
+  };
 
   const handleSearch = (inputValue) => {
     setOptions(
@@ -67,7 +67,6 @@ function Search() {
       <IconClose className={styles['close']} style={{}} onClick={handleVisible} />
     </div>}
   </>
-
 }
 
-export default Search
+export default Search;
