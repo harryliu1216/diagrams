@@ -1,11 +1,12 @@
 import { Input, Form, Space } from '@arco-design/web-react';
-import styles from './index.less';
+import styles from './CustomNode.less';
 import {
   IconCopy,
   IconDelete,
   IconInfoCircle,
   IconExpand,
-  IconEdit
+  IconEdit,
+  IconExclamationCircle
 } from '@arco-design/web-react/icon';
 import { Handle, Position } from 'reactflow';
 
@@ -19,12 +20,24 @@ export type NodeData = {
   onExpand: () => {};
   data: {
     title: string;
+    type: string;
+    fields: any[];
   };
+};
+
+const getFormController = ({ type, attribute }) => {
+  switch (type) {
+    case 'input':
+      return <Input {...attribute} />;
+    case 'textarea':
+      return <Input.TextArea {...attribute} />;
+  }
 };
 
 export default function CustomNode({ data }: { data: NodeData }) {
   const { onCopy, onDelete, onShowInfo, onConnect, onExpand } = data;
-  const { title } = data.data;
+  const { title, fields } = data.data;
+  console.log(data.data);
   return (
     <div className={styles['node-wrapper']}>
       <Handle type="target" position={Position.Left} onConnect={onConnect} />
@@ -34,11 +47,13 @@ export default function CustomNode({ data }: { data: NodeData }) {
           <IconEdit />
         </div>
         <div className={styles['node-form']}>
-          <Form autoComplete="off" layout="vertical">
-            <FormItem label="文件名称">
-              <Input placeholder="输入文件名称" />
-            </FormItem>
-          </Form>
+          {fields && (
+            <Form autoComplete="off" layout="vertical">
+              {fields.map((item) => {
+                return <FormItem label={item.label}>{getFormController(item)}</FormItem>;
+              })}
+            </Form>
+          )}
         </div>
       </div>
       <Handle type="source" position={Position.Right} />

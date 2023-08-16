@@ -27,9 +27,9 @@ export default function LayoutComponent() {
             <MenuItem key="/">
               <Link to="/">数据表</Link>
             </MenuItem>
-            {/* <MenuItem key="/1">
-              <Link to="/">策略</Link>
-            </MenuItem> */}
+            <MenuItem key="/strategy">
+              <Link to="/strategy">策略</Link>
+            </MenuItem>
             <MenuItem key="/workflow">
               <Link to="/workflow">工作流</Link>
             </MenuItem>

@@ -32,17 +32,10 @@ export default function WorkflowPage() {
             自定义节点1 <br /> 自定义节点1
             <Divider
               style={{
-                borderBottomStyle: 'dashed'
+                borderBottomStyle: 'dashed',
+                margin: '16px 0'
               }}
             />
-            {/* <Row justify="space-between" align="center">
-              <Col span={8}>
-                <IconPlayCircle fontSize={24} />
-              </Col>
-              <Col span={8} style={{ textAlign: 'right' }}>
-                <Link type="primary">执行历史</Link>
-              </Col>
-            </Row> */}
             <div className="flex justify-between">
               <IconPlayCircle fontSize={24} />
               <Link type="primary">执行历史</Link>
@@ -64,7 +57,8 @@ export default function WorkflowPage() {
             自定义节点1 <br /> 自定义节点1
             <Divider
               style={{
-                borderBottomStyle: 'dashed'
+                borderBottomStyle: 'dashed',
+                margin: '16px 0'
               }}
             />
             <div className="flex justify-between">

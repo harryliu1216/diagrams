@@ -9,6 +9,8 @@ import ReactFlow, {
 } from 'reactflow';
 import styles from './index.less';
 import CustomNode from './components/CustomNode';
+import { IconDragArrow } from '@arco-design/web-react/icon';
+import NodeSider from './components/NodeSider';
 
 const Sider = Layout.Sider;
 const InputSearch = Input.Search;
@@ -26,12 +28,6 @@ export default function WorkflowEditPage() {
   const [nodeTypes, setNodeTypes] = useState({
     customNode: CustomNode
   });
-
-  const onDragStart = (event, node) => {
-    console.log(node);
-    event.dataTransfer.setData('application/reactflow', JSON.stringify(node));
-    event.dataTransfer.effectAllowed = 'move';
-  };
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
@@ -131,61 +127,7 @@ export default function WorkflowEditPage() {
   return (
     <Layout style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
       <Sider className={styles.slider}>
-        <InputSearch
-          allowClear
-          placeholder="搜索节点"
-          style={{ width: '100%', marginBottom: 16 }}
-        />
-
-        <Menu>
-          <SubMenu key="0" title={<>工具包</>}>
-            <MenuItem key="0_0">
-              <div
-                draggable
-                onDragStart={(event) =>
-                  onDragStart(event, {
-                    title: '生成文件',
-                    type: 'generateFile'
-                  })
-                }
-              >
-                生成文件
-              </div>
-            </MenuItem>
-          </SubMenu>
-          <SubMenu key="1" title={<>发布</>}>
-            <MenuItem key="1_0">
-              <div
-                draggable
-                onDragStart={(event) =>
-                  onDragStart(event, {
-                    title: '下载',
-                    type: 'download'
-                  })
-                }
-              >
-                下载
-              </div>
-            </MenuItem>
-            <MenuItem key="1_1">
-              <div
-                draggable
-                onDragStart={(event) =>
-                  onDragStart(event, {
-                    title: 'OpenAPI',
-                    type: 'openapi'
-                  })
-                }
-              >
-                OpenAPI
-              </div>
-            </MenuItem>
-          </SubMenu>
-          <SubMenu key="2" title={<>其他</>}>
-            <MenuItem key="2_0">Menu 1</MenuItem>
-            <MenuItem key="2_1">Menu 2</MenuItem>
-          </SubMenu>
-        </Menu>
+        <NodeSider></NodeSider>
       </Sider>
       <Layout>
         <div
