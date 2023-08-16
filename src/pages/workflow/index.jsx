@@ -35,16 +35,18 @@ export default function WorkflowPage() {
                 borderBottomStyle: 'dashed'
               }}
             />
-            <Row justify="space-between" align="center">
+            {/* <Row justify="space-between" align="center">
               <Col span={8}>
-                <Link type="primary" icon={<IconPlayCircle fontSize={16} />}>
-                  启用
-                </Link>
+                <IconPlayCircle fontSize={24} />
               </Col>
               <Col span={8} style={{ textAlign: 'right' }}>
                 <Link type="primary">执行历史</Link>
               </Col>
-            </Row>
+            </Row> */}
+            <div className="flex justify-between">
+              <IconPlayCircle fontSize={24} />
+              <Link type="primary">执行历史</Link>
+            </div>
           </Card>
         </Col>
         <Col span={6}>
@@ -65,16 +67,10 @@ export default function WorkflowPage() {
                 borderBottomStyle: 'dashed'
               }}
             />
-            <Row justify="space-between" align="center">
-              <Col span={8}>
-                <Link type="primary" icon={<IconPlayCircle fontSize={16} />}>
-                  启用
-                </Link>
-              </Col>
-              <Col span={8} style={{ textAlign: 'right' }}>
-                <Link type="primary">执行历史</Link>
-              </Col>
-            </Row>
+            <div className="flex justify-between">
+              <IconPlayCircle fontSize={24} />
+              <Link type="primary">执行历史</Link>
+            </div>
           </Card>
         </Col>
       </Row>

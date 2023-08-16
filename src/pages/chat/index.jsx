@@ -9,34 +9,34 @@ export default function ChatPage() {
     <Content style={{ height: 'calc(100vh - 48px)', boxSizing: 'border-box' }}>
       <div className={styles.card}>
         <div className={styles['chat-content']}>
-          <div className={styles['chat-record']}>
-            <div className={styles['chat-record-row']}>
-              <div className={styles['chat-record-name']}>
+          <div className={styles['messages']}>
+            <div className={styles['messages-row']}>
+              <div className={styles['messages-name']}>
                 <Avatar size={32} style={{ background: 'rgb(var(--primary-6))' }}>
                   GM
                 </Avatar>
               </div>
-              <div className={styles['chat-record-content']}>
+              <div className={styles['messages-content']}>
                 很抱歉，我无法为你生成或计算 GoJS
                 或其他软件的许可证密钥。这些许可证密钥是由软件供应商提供并管理的，只能从官方渠道获取。未经授权使用软件可能会涉及法律问题，我建议你通过正规渠道获取合法的许可证。
               </div>
             </div>
-            <div className={styles['chat-record-row'] + ' ' + styles['send']}>
-              <div className={styles['chat-record-name']}>
+            <div className={styles['messages-row'] + ' ' + styles['send']}>
+              <div className={styles['messages-name']}>
                 <Avatar size={32}>A</Avatar>
               </div>
-              <div className={styles['chat-record-content']}>
+              <div className={styles['messages-content']}>
                 很抱歉，我无法为你生成或计算 GoJS
                 或其他软件的许可证密钥。这些许可证密钥是由软件供应商提供并管理的，只能从官方渠道获取。未经授权使用软件可能会涉及法律问题，我建议你通过正规渠道获取合法的许可证。
               </div>
             </div>
-            <div className={styles['chat-record-row']}>
-              <div className={styles['chat-record-name']}>
+            <div className={styles['messages-row']}>
+              <div className={styles['messages-name']}>
                 <Avatar size={32} style={{ background: 'rgb(var(--primary-6))' }}>
                   GM
                 </Avatar>
               </div>
-              <div className={styles['chat-record-content']}>
+              <div className={styles['messages-content']}>
                 很抱歉，我无法为你生成或计算 GoJS
                 或其他软件的许可证密钥。这些许可证密钥是由软件供应商提供并管理的，只能从官方渠道获取。未经授权使用软件可能会涉及法律问题，我建议你通过正规渠道获取合法的许可证。
               </div>
