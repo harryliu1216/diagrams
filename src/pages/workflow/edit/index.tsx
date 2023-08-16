@@ -137,7 +137,7 @@ export default function WorkflowEditPage() {
           style={{ width: '100%', marginBottom: 16 }}
         />
 
-        <Menu theme="dark">
+        <Menu>
           <SubMenu key="0" title={<>工具包</>}>
             <MenuItem key="0_0">
               <div
