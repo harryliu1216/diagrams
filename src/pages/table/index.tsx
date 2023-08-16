@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
-import ReactFlow, { Background, Controls, MiniMap, useEdgesState, useNodesState } from 'reactflow';
+import ReactFlow, {
+  Background,
+  Controls,
+  MiniMap,
+  useEdgesState,
+  useNodesState,
+  useReactFlow
+} from 'reactflow';
 import { nodes as initialNodes, edges as initialEdges, data } from './initialNodes';
 import { FieldList, List } from './components/FlowNode';
 import { Tree, Radio, Layout, Table, Button } from '@arco-design/web-react';
 import { IconStorage } from '@arco-design/web-react/icon';
 import 'reactflow/dist/style.css';
+import XSpreadsheet, { Cells } from '../../components/react-x-spreadsheet';
 
 const RadioGroup = Radio.Group;
 const Sider = Layout.Sider;
@@ -54,17 +62,67 @@ const generateTableData = (data: any[], tableName: string) => {
 
 export default function TablePage() {
   const treeData = generateTreeData(data);
-
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [nodes, setNodes, onNodesChange] = useNodesState<any>(initialNodes);
   const [selectedKeys, updateSelectedKeys] = useState(treeData[0] ? [treeData[0].key] : []);
   const [mode, updateMode] = useState('view');
+  const [sheets, updateSheets] = useState<any[]>([]);
 
   const handleSelect = (keys: string[]) => {
     updateSelectedKeys(keys.map((item) => item.split('-')[0]));
+    let cells: Cells = {};
+    let cellIndex: { [key: string]: number } = {};
+
+    const isExist = sheets.find((item) => item.name == keys[0]);
+    if (isExist) {
+      return;
+    }
+    const tableData = generateTableData(data, selectedKeys[0]);
+    // 生成表头
+    tableData.columns.forEach((item, index: number) => {
+      cells[index] = {
+        text: item.title,
+        editable: false,
+        style: 0 // sheet styles index
+      };
+      cellIndex[item.key] = index;
+    });
+
+    // 生成数据
+    let rows: { [key: number]: { cells: Cells } } = {};
+    tableData.data.forEach((item, index: number) => {
+      let cells: Cells = {};
+      for (let key in item) {
+        cells[cellIndex[key]] = {
+          text: item[key]
+        };
+      }
+      rows[index + 1] = {
+        cells
+      };
+    });
+
+    sheets.push({
+      name: keys[0],
+      freeze: 'A2',
+      styles: [
+        {
+          font: {
+            bold: true
+          }
+        }
+      ],
+      rows: {
+        len: 0,
+        0: {
+          cells
+        },
+        ...rows
+      }
+    });
+    updateSheets([...sheets]);
   };
   const tableData = generateTableData(data, selectedKeys[0]);
-  console.log(tableData);
 
   return (
     <>
@@ -109,12 +167,23 @@ export default function TablePage() {
                   selectedKeys={selectedKeys}
                 />
               </Sider>
-              <Content>
-                <div className={styles['table-filter']}>
+              {/* <Content> */}
+              {/* <div className={styles['table-filter']}>
                   <Button icon={<IconStorage />}>表结构</Button>
-                </div>
-                <Table columns={tableData.columns} data={tableData.data} rowKey="id" />
-              </Content>
+                </div> */}
+              {/* <Table columns={tableData.columns} data={tableData.data} rowKey="id" /> */}
+              <XSpreadsheet
+                data={sheets}
+                options={{
+                  showToolbar: false,
+                  showContextmenu: false,
+                  view: {
+                    height: () => document.documentElement.clientHeight - 48,
+                    width: () => document.documentElement.clientWidth - 200
+                  }
+                }}
+              />
+              {/* </Content> */}
             </Layout>
           </div>
         )}

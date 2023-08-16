@@ -16,13 +16,13 @@
     "lodash": "^4.17.21",
     "reactflow": "^11.8.1",
     "tailwindcss": "^3.3.3",
-    "umi": "^4.0.74"
+    "umi": "^4.0.74",
+    "x-data-spreadsheet": "^1.1.9"
   },
   "devDependencies": {
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
-    "typescript": "^5.0.3",
     "@umijs/plugins": "^4.0.74",
-    "tailwindcss": "^3"
+    "typescript": "^5.0.3"
   }
 }
