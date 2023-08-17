@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
 import ReactFlow, {
@@ -44,6 +44,7 @@ const generateTreeData = (data: any[]) => {
 
 const generateTableData = (data: any[], tableName: string) => {
   let table = data.find((item) => item.name === tableName);
+
   if (!table) {
     return { tableData: [], columns: [] };
   }
@@ -67,17 +68,21 @@ export default function TablePage() {
   const [selectedKeys, updateSelectedKeys] = useState(treeData[0] ? [treeData[0].key] : []);
   const [mode, updateMode] = useState('view');
   const [sheets, updateSheets] = useState<any[]>([]);
+  const spreadsheetInstance = useRef(null);
 
   const handleSelect = (keys: string[]) => {
-    updateSelectedKeys(keys.map((item) => item.split('-')[0]));
+    let _keys = keys.map((item) => item.split('-')[0]);
     let cells: Cells = {};
     let cellIndex: { [key: string]: number } = {};
-
-    const isExist = sheets.find((item) => item.name == keys[0]);
-    if (isExist) {
+    const sheetIndex = sheets.findIndex((item) => item.name == keys[0]);
+    console.log(sheetIndex);
+    if (sheetIndex > -1) {
+      spreadsheetInstance?.current && spreadsheetInstance?.current.toggleSheet(sheetIndex);
       return;
+    } else {
+      // spreadsheetInstance?.current.addSheet(keys[0]);
     }
-    const tableData = generateTableData(data, selectedKeys[0]);
+    const tableData = generateTableData(data, _keys[0]);
     // 生成表头
     tableData.columns.forEach((item, index: number) => {
       cells[index] = {
@@ -120,9 +125,11 @@ export default function TablePage() {
         ...rows
       }
     });
+
+    updateSelectedKeys(_keys);
     updateSheets([...sheets]);
   };
-  const tableData = generateTableData(data, selectedKeys[0]);
+  // const tableData = generateTableData(data, selectedKeys[0]);
 
   return (
     <>
@@ -182,6 +189,7 @@ export default function TablePage() {
                     width: () => document.documentElement.clientWidth - 200
                   }
                 }}
+                spreadsheetInstance={spreadsheetInstance}
               />
               {/* </Content> */}
             </Layout>
