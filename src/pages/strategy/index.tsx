@@ -3,6 +3,7 @@ import { Layout, Tree } from '@arco-design/web-react';
 import XSpreadsheet, { Cells } from '../../components/react-x-spreadsheet';
 import { data } from '../table/initialNodes';
 import styles from './index.less';
+import { IconFolder } from '@arco-design/web-react/icon';
 
 const Sider = Layout.Sider;
 const Content = Layout.Content;
@@ -12,14 +13,12 @@ const generateTreeData = (data: any[]) => {
     {
       title: '默认文件夹',
       key: 'root',
+      icon: <IconFolder />,
+
       children: data.map((item) => {
         return {
           title: item.name,
-          key: item.name,
-          children: item.fields.map((field: any) => ({
-            title: field.name,
-            key: item.name + '-' + field.name
-          }))
+          key: item.name
         };
       })
     }
