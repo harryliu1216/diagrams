@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Layout, Tree } from '@arco-design/web-react';
 import XSpreadsheet, { Cells } from '../../components/react-x-spreadsheet';
 import { data } from '../table/initialNodes';
@@ -8,13 +8,22 @@ const Sider = Layout.Sider;
 const Content = Layout.Content;
 
 const generateTreeData = (data: any[]) => {
-  return data.map((item) => {
-    return {
-      title: item.name,
-      key: item.name,
-      children: []
-    };
-  });
+  return [
+    {
+      title: '默认文件夹',
+      key: 'root',
+      children: data.map((item) => {
+        return {
+          title: item.name,
+          key: item.name,
+          children: item.fields.map((field: any) => ({
+            title: field.name,
+            key: item.name + '-' + field.name
+          }))
+        };
+      })
+    }
+  ];
 };
 
 const generateTableData = (data: any[], tableName: string) => {
@@ -38,30 +47,46 @@ const generateTableData = (data: any[], tableName: string) => {
 export default function StrategyPage() {
   const treeData = generateTreeData(data);
 
-  const [selectedKeys, updateSelectedKeys] = useState(treeData[0] ? [treeData[0].key] : []);
+  const [selectedKeys, updateSelectedKeys] = useState(
+    treeData[0].children[0] ? [treeData[0].children[0].key] : []
+  );
   const [sheets, updateSheets] = useState<any[]>([]);
+  const [toggleSheet, updateToggleSheet] = useState<boolean>(false);
 
   useEffect(() => {
     generateSheets(selectedKeys);
   }, []);
 
+  useEffect(() => {
+    if (toggleSheet) {
+      spreadsheetInstance?.current && spreadsheetInstance?.current.toggleSheet(sheets.length - 1);
+      updateToggleSheet(false);
+    }
+  }, [sheets]);
+
+  const spreadsheetInstance = useRef(null);
+
   const handleSelect = (keys: string[]) => {
-    updateSelectedKeys(keys.map((item) => item.split('-')[0]));
-    generateSheets(keys);
+    if (keys[0] == 'root') {
+      return;
+    }
+    let _keys = keys.map((item) => item.split('-')[0]);
+    updateSelectedKeys(_keys);
+    generateSheets(_keys);
   };
 
   const generateSheets = (keys) => {
     let cells: Cells = {};
     let cellIndex: { [key: string]: number } = {};
-
-    console.log(keys);
-
-    const isExist = sheets.find((item) => item.name == keys[0]);
-    if (isExist) {
+    const sheetIndex = sheets.findIndex((item) => item.name == keys[0]);
+    console.log(sheetIndex);
+    if (sheetIndex > -1) {
+      spreadsheetInstance?.current && spreadsheetInstance?.current.toggleSheet(sheetIndex);
       return;
+    } else {
+      // spreadsheetInstance?.current.addSheet(keys[0]);
     }
-    const tableData = generateTableData(data, selectedKeys[0]);
-
+    const tableData = generateTableData(data, keys[0]);
     // 生成表头
     tableData.columns.forEach((item, index: number) => {
       cells[index] = {
@@ -104,19 +129,22 @@ export default function StrategyPage() {
         ...rows
       }
     });
+
+    // 不能直接切sheet index。新sheet还没load。在useEffect中切换index。
+    updateToggleSheet(true);
     updateSheets([...sheets]);
   };
-
-  console.log(sheets);
 
   return (
     <Layout className={styles['list-view']}>
       <Sider
+        className={styles['layout-sider']}
         style={{
           height: 'calc(100vh - 48px)',
           borderRight: '1px solid var(--color-border)',
           padding: 12,
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          width: 250
         }}
       >
         <Tree
@@ -134,9 +162,10 @@ export default function StrategyPage() {
             showContextmenu: false,
             view: {
               height: () => document.documentElement.clientHeight - 48,
-              width: () => document.documentElement.clientWidth - 200
+              width: () => document.documentElement.clientWidth - 250
             }
           }}
+          spreadsheetInstance={spreadsheetInstance}
         />
       </Content>
     </Layout>

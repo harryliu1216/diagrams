@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
 import ReactFlow, { Background, Controls, MiniMap, useEdgesState, useNodesState } from 'reactflow';
@@ -36,6 +36,7 @@ const generateTreeData = (data: any[]) => {
 
 const generateTableData = (data: any[], tableName: string) => {
   let table = data.find((item) => item.name === tableName);
+
   if (!table) {
     return [];
   }
@@ -129,9 +130,6 @@ export default function TablePage() {
                 />
               </Sider>
               <Content>
-                <div className={styles['table-filter']}>
-                  <Button icon={<IconStorage />}>表结构</Button>
-                </div>
                 <Table columns={columns} data={tableData} rowKey="id" />
               </Content>
             </Layout>
