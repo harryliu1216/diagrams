@@ -1,5 +1,8 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import Spreadsheet, { Options } from 'x-data-spreadsheet';
+import zhCN from 'x-data-spreadsheet/dist/locale/zh-cn';
+
+Spreadsheet.locale('zh-cn', zhCN);
 
 export type XSpreadsheetOptions = {
   options?: Options;
@@ -11,7 +14,7 @@ export type XSpreadsheetOptions = {
       cells: Cells;
     };
   }[];
-  onChange: (data: any) => void;
+  onChange?: (data: any) => void;
 };
 
 export type Cells = {

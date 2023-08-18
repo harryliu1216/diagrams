@@ -1,20 +1,12 @@
 import { useEffect, useState } from 'react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
-import ReactFlow, {
-  Background,
-  Controls,
-  MiniMap,
-  useEdgesState,
-  useNodesState,
-  useReactFlow
-} from 'reactflow';
+import ReactFlow, { Background, Controls, MiniMap, useEdgesState, useNodesState } from 'reactflow';
 import { nodes as initialNodes, edges as initialEdges, data } from './initialNodes';
 import { FieldList, List } from './components/FlowNode';
 import { Tree, Radio, Layout, Table, Button } from '@arco-design/web-react';
 import { IconStorage } from '@arco-design/web-react/icon';
 import 'reactflow/dist/style.css';
-import XSpreadsheet, { Cells } from '../../components/react-x-spreadsheet';
 
 const RadioGroup = Radio.Group;
 const Sider = Layout.Sider;
@@ -45,20 +37,40 @@ const generateTreeData = (data: any[]) => {
 const generateTableData = (data: any[], tableName: string) => {
   let table = data.find((item) => item.name === tableName);
   if (!table) {
-    return { tableData: [], columns: [] };
+    return [];
   }
-  let columns = table.fields.map((item: any) => {
-    return {
-      key: item.name,
-      dataIndex: item.name,
-      title: item.name
-    };
-  });
 
-  let datasource = table.data;
-
-  return { columns, data: datasource };
+  return table.fields;
 };
+
+const columns = [
+  {
+    title: '字段名称',
+    dataIndex: 'name'
+  },
+  {
+    title: '字段描述',
+    dataIndex: 'label'
+  },
+  {
+    title: '字段类型',
+    dataIndex: 'type'
+  },
+  {
+    title: '字段长度',
+    dataIndex: 'length',
+    render: (value: number) => {
+      return value !== undefined ? value : '不限';
+    }
+  },
+  {
+    title: '是否为空',
+    dataIndex: 'isNull',
+    render: (value: boolean) => {
+      return value !== undefined ? value : '否';
+    }
+  }
+];
 
 export default function TablePage() {
   const treeData = generateTreeData(data);
@@ -66,62 +78,11 @@ export default function TablePage() {
   const [nodes, setNodes, onNodesChange] = useNodesState<any>(initialNodes);
   const [selectedKeys, updateSelectedKeys] = useState(treeData[0] ? [treeData[0].key] : []);
   const [mode, updateMode] = useState('view');
-  const [sheets, updateSheets] = useState<any[]>([]);
 
   const handleSelect = (keys: string[]) => {
     updateSelectedKeys(keys.map((item) => item.split('-')[0]));
-    let cells: Cells = {};
-    let cellIndex: { [key: string]: number } = {};
-
-    const isExist = sheets.find((item) => item.name == keys[0]);
-    if (isExist) {
-      return;
-    }
-    const tableData = generateTableData(data, selectedKeys[0]);
-    // 生成表头
-    tableData.columns.forEach((item, index: number) => {
-      cells[index] = {
-        text: item.title,
-        editable: false,
-        style: 0 // sheet styles index
-      };
-      cellIndex[item.key] = index;
-    });
-
-    // 生成数据
-    let rows: { [key: number]: { cells: Cells } } = {};
-    tableData.data.forEach((item, index: number) => {
-      let cells: Cells = {};
-      for (let key in item) {
-        cells[cellIndex[key]] = {
-          text: item[key]
-        };
-      }
-      rows[index + 1] = {
-        cells
-      };
-    });
-
-    sheets.push({
-      name: keys[0],
-      freeze: 'A2',
-      styles: [
-        {
-          font: {
-            bold: true
-          }
-        }
-      ],
-      rows: {
-        len: 0,
-        0: {
-          cells
-        },
-        ...rows
-      }
-    });
-    updateSheets([...sheets]);
   };
+
   const tableData = generateTableData(data, selectedKeys[0]);
 
   return (
@@ -167,23 +128,12 @@ export default function TablePage() {
                   selectedKeys={selectedKeys}
                 />
               </Sider>
-              {/* <Content> */}
-              {/* <div className={styles['table-filter']}>
+              <Content>
+                <div className={styles['table-filter']}>
                   <Button icon={<IconStorage />}>表结构</Button>
-                </div> */}
-              {/* <Table columns={tableData.columns} data={tableData.data} rowKey="id" /> */}
-              <XSpreadsheet
-                data={sheets}
-                options={{
-                  showToolbar: false,
-                  showContextmenu: false,
-                  view: {
-                    height: () => document.documentElement.clientHeight - 48,
-                    width: () => document.documentElement.clientWidth - 200
-                  }
-                }}
-              />
-              {/* </Content> */}
+                </div>
+                <Table columns={columns} data={tableData} rowKey="id" />
+              </Content>
             </Layout>
           </div>
         )}

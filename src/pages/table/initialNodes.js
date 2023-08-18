@@ -5,80 +5,93 @@ export const data = [
   {
     name: '道具表',
     fields: [
-      { name: 'name', target: { name: '' } },
-      { name: 'age', target: { name: '' } },
-      { name: 'gender', target: { name: '' } },
-      { name: 'major', target: { name: 'major' } },
-      { name: 'score', target: { name: '' } },
-      { name: 'class', target: { name: 'class' } }
+      { name: 'name', label: '名称', type: 'string', target: { name: '' } },
+      { name: 'page', label: '商城页面', type: 'string', target: { name: '' } },
+      { name: 'toSize', label: '每次购买数量', type: 'number', target: { name: '' } },
+      { name: 'toValue', label: '对应道具ID', type: 'string', target: { name: 'major' } },
+      { name: 'toType', label: '商店类型分类', type: 'string', target: { name: '' } },
+      { name: 'ifHot', label: '是否显示', type: 'boolean', target: { name: 'class' } }
     ],
     data: [
       {
-        name: '张三',
-        age: '18',
-        gender: 'M',
-        major: '工程技术',
-        score: '496',
-        class: '3',
-        id: '1'
-      },
-      { name: '李四', age: '17', gender: 'F', major: '英语', score: '468', class: '1', id: '2' },
-      {
-        name: '王五',
-        age: '18',
-        gender: 'M',
-        major: '计算机科学与技术',
-        score: '489',
-        class: '2',
-        id: '3'
+        name: '太阳水',
+        page: '5',
+        toSize: '5',
+        toValue: '4',
+        score: 'medical',
+        toType: '1',
+        ifHot: true
       }
     ]
   },
   {
     name: '商城表',
     fields: [
-      { name: 'college', target: { name: '' } },
-      { name: 'number', target: { name: '' } },
-      { name: 'name', target: { name: '' } },
-      { name: 'school', target: { name: 'school' } }
+      { name: 'name', label: '名称', type: 'string', target: { name: '' } },
+      { name: 'image_hexie', label: '图片ID', type: 'string', target: { name: '' } },
+      { name: 'rate', label: '质量', type: 'string', target: { name: '' } },
+      { name: 'isDebris', label: '是否碎片', type: 'boolean', target: { name: 'school' } },
+      { name: 'score', label: '装备碎片评分', type: 'string', target: { name: 'school' } }
     ],
     data: [
       {
-        college: '信息学院',
-        number: '120',
-        name: '计算机科学与技术',
-        school: '上海海洋大学',
-        id: '4'
-      },
-      { college: '工程学院', number: '115', name: '工程技术', school: '上海第二工业大学', id: '5' },
-      { college: '外语学院', number: '118', name: '英语', school: '上海杉达学院', id: '6' }
+        name: '裁决',
+        image_hexie: '120',
+        rate: 55,
+        isDebris: true,
+        score: '4'
+      }
+    ]
+  },
+  {
+    name: 'Buff',
+    fields: [
+      { name: 'name', label: '名称', type: 'string', target: { name: '' } },
+      { name: 'buffType', label: '类型', type: 'string', target: { name: '' } },
+      { name: 'buffSubType', label: '子类型', type: 'string', target: { name: '' } },
+      { name: 'isDebris', label: '是否碎片', type: 'boolean', target: { name: 'school' } },
+      { name: 'triggerValue', label: '触发值', type: 'string', target: { name: 'school' } }
+    ],
+    data: [
+      {
+        name: '中毒',
+        buffType: 'debuff',
+        buffSubType: 55,
+        isDebris: false,
+        triggerValue: 'skill'
+      }
     ]
   },
   {
     name: '技能表',
     fields: [
-      { name: 'name', target: { name: '' } },
-      { name: 'area', target: { name: '' } },
-      { name: 'type', target: { name: '' } },
-      { name: 'city', target: { name: '' } }
+      { name: 'name', label: '名称', type: 'string', target: { name: '' } },
+      { name: 'info', label: '信息', type: 'string', target: { name: '' } },
+      { name: 'type', label: '类型', type: 'string', target: { name: '' } },
+      { name: 'typeName', label: '类型名称', type: 'string', target: { name: '' } },
+      { name: 'rare', label: '品质', type: 'string', target: { name: '' } },
+      { name: 'isToTarget', label: '是否技能有指定目标', type: 'boolean', target: { name: '' } },
+      { name: 'isRemote', label: '是否远程技能', type: 'boolean', target: { name: '' } },
+      { name: 'skillType', label: '技能类型', type: 'string', target: { name: '' } },
+      { name: 'skillTypeInfo', label: '技能类型名称', type: 'string', target: { name: '' } },
+      { name: 'propTypeId', label: '技能属性', type: 'string', target: { name: '' } },
+      { name: 'attribute', label: '加成属性', type: 'string', target: { name: '' } }
     ],
     data: [
-      { name: '上海海洋大学', area: '浦东新区', type: '农业类', city: '上海', id: '7' },
-      { name: '上海第二工程技术大学', area: '浦东新区', type: '理工类', city: '上海', id: '8' },
-      { name: '上海杉达学院', area: '浦东新区', type: '综合类', city: '上海', id: '9' }
+      { name: '野蛮冲撞', info: '用肩膀把敌人撞开', type: '', typeName: '辅助', rare: '60', isToTarget: true, isRemote: false, skillTYpe: 'solider', skillTypeInfo: '战士技能', propTypeId: '', attribute: '' }
     ]
   },
   {
     name: '七天任务',
     fields: [
-      { name: 'number', target: { name: '' } },
-      { name: 'index', target: { name: '' } },
-      { name: 'averageScore', target: { name: '' } }
+      { name: 'name', label: '名称', type: 'string', target: { name: '' } },
+      { name: 'info', label: '任务详情', type: 'string', target: { name: '' } },
+      { name: 'taskTyp', label: '任务类型', type: 'string', target: { name: '' } },
+      { name: 'taskValue', label: '任务需求', type: 'string', target: { name: '' } },
+      { name: 'isLogin', label: '是否登陆', type: 'boolean', target: { name: '' } }
     ],
     data: [
-      { number: '40', index: '1', averageScore: '500', id: '10' },
-      { number: '38', index: '2', averageScore: '470', id: '11' },
-      { number: '38', index: '2', averageScore: '499', id: '12' }
+      { name: '签到', info: '每日签到', taskTyp: 'common', taskValue: 'login', isLogin: true },
     ]
   }
 ];
