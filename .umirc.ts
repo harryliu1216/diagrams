@@ -8,10 +8,13 @@ export default defineConfig({
     { path: '/workflow/edit', component: 'workflow/edit/index' },
     { path: '/package', component: 'package/index' },
     { path: '/publish', component: 'publish/index' },
-    { path: '/chat', component: 'chat/index' }
+    { path: '/chat', component: 'chat/index' },
+    { path: '/*', component: '@/pages/404.tsx' }
   ],
 
   npmClient: 'yarn',
   tailwindcss: {},
-  plugins: ['@umijs/plugins/dist/tailwindcss']
+  plugins: ['@umijs/plugins/dist/tailwindcss', '@umijs/plugins/dist/initial-state', '@umijs/plugins/dist/model'],
+  initialState: {},
+  model: {},
 });

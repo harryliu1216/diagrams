@@ -1,18 +1,33 @@
-import { Link, Outlet, useLocation } from 'umi';
+import { Link, Outlet, useLocation, useModel } from 'umi';
 import { Menu, Avatar, Input, Space, Button } from '@arco-design/web-react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
 
 import Search from '@/components/Search';
 import { IconSettings } from '@arco-design/web-react/icon';
+import { useEffect } from 'react';
 
 const MenuItem = Menu.Item;
 
 export default function LayoutComponent() {
   document.body.setAttribute('arco-theme', 'dark');
   const location = useLocation();
-
   const selectedKeys = [location.pathname || '/'];
+
+  const { userInfo, runLogin } = useModel('userModel');
+  const { projects, runQueryProject } = useModel('projectModel');
+
+  // 自动登录
+  useEffect(() => {
+    runLogin('test', '123456');
+  }, []);
+
+  useEffect(() => {
+    console.log(userInfo);
+    if (userInfo) {
+      runQueryProject();
+    }
+  }, [userInfo]);
 
   return (
     <div className={styles['layout']}>
@@ -33,12 +48,12 @@ export default function LayoutComponent() {
             <MenuItem key="/workflow">
               <Link to="/workflow">工作流</Link>
             </MenuItem>
-            <MenuItem key="/package">
+            {/* <MenuItem key="/package">
               <Link to="/package">打包</Link>
             </MenuItem>
             <MenuItem key="/publish">
               <Link to="/publish">发布</Link>
-            </MenuItem>
+            </MenuItem> */}
           </Menu>
           <Search />
           <Space size={'medium'} align="center">

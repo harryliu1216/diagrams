@@ -5,8 +5,9 @@ import ReactFlow, { Background, Controls, MiniMap, useEdgesState, useNodesState 
 import { nodes as initialNodes, edges as initialEdges, data } from './initialNodes';
 import { FieldList, List } from './components/FlowNode';
 import { Tree, Radio, Layout, Table, Button } from '@arco-design/web-react';
-import { IconStorage } from '@arco-design/web-react/icon';
 import 'reactflow/dist/style.css';
+
+import { useModel } from 'umi';
 
 const RadioGroup = Radio.Group;
 const Sider = Layout.Sider;
