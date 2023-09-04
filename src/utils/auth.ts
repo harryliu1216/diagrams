@@ -17,6 +17,7 @@ export default {
     localStorage.setItem(USER_INFO_KEY, JSON.stringify(userinfo));
   },
   getUserInfo() {
-    return JSON.parse(localStorage.getItem(USER_INFO_KEY) || '{}');
+    let data = localStorage.getItem(USER_INFO_KEY)
+    return data ? JSON.parse(data) : null;
   },
 };

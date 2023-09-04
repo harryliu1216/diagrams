@@ -1,11 +1,11 @@
 import { Link, Outlet, useLocation, useModel } from 'umi';
-import { Menu, Avatar, Input, Space, Button } from '@arco-design/web-react';
+import { Menu, Avatar, Input, Space, Button, Form, Modal, Dropdown } from '@arco-design/web-react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
 
 import Search from '@/components/Search';
 import { IconSettings } from '@arco-design/web-react/icon';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const MenuItem = Menu.Item;
 
@@ -14,12 +14,12 @@ export default function LayoutComponent() {
   const location = useLocation();
   const selectedKeys = [location.pathname || '/'];
 
-  const { userInfo, runLogin } = useModel('userModel');
+  const { userInfo, runLogin, logout } = useModel('userModel');
   const { projects, runQueryProject } = useModel('projectModel');
 
   // 自动登录
   useEffect(() => {
-    runLogin('test', '123456');
+    // runLogin('test', '123456');
   }, []);
 
   useEffect(() => {
@@ -29,6 +29,14 @@ export default function LayoutComponent() {
     }
   }, [userInfo]);
 
+  const dropList = (
+    <Menu>
+      <Menu.Item key="logout" onClick={logout}>
+        注销
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <div className={styles['layout']}>
       <div className={styles['header']}>
@@ -36,7 +44,7 @@ export default function LayoutComponent() {
         <div className={styles.right}>
           <Menu
             mode="horizontal"
-            style={{ background: 'transparent', width: 400, height: 58 }}
+            style={{ background: 'transparent', maxWidth: 300, height: 58, flexBasis: 300 }}
             selectedKeys={selectedKeys}
           >
             <MenuItem key="/">
@@ -58,8 +66,10 @@ export default function LayoutComponent() {
           <Search />
           <Space size={'medium'} align="center">
             <Button type="primary">导入</Button>
-            <IconSettings fontSize={18} />
-            <Avatar size={32}>A</Avatar>
+            <IconSettings style={{ fontSize: 18, verticalAlign: 'middle', cursor: 'pointer' }} />
+            <Dropdown droplist={dropList}>
+              <Avatar size={32}>A</Avatar>
+            </Dropdown>
           </Space>
         </div>
       </div>
