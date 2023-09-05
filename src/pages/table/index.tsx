@@ -87,6 +87,8 @@ export default function TablePage() {
 
   const tableData = generateTableData(data, selectedKeys[0]);
 
+  console.log(nodes, edges);
+
   return (
     <>
       <div className={styles['bar']}>

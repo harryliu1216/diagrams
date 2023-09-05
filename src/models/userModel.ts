@@ -7,7 +7,6 @@ import { history } from 'umi';
 
 export default function userModel() {
   const [userInfo, updateUserInfo] = useState(auth.getUserInfo())
-  console.log(auth.getUserInfo())
 
   const { run: runLogin, loading: loadingLogin } = useRequest((account, password) => {
     return request.post(`auth/login`, { data: { account, password } })
