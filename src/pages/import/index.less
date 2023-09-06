@@ -1,0 +1,49 @@
+.wrap {
+  margin-top: 20px;
+  cursor: default;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+
+  .step {
+    padding-top: 100px;
+
+    h3 {
+      margin-left: 55px;
+    }
+  }
+}
+
+.content {
+  .items {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    margin-bottom: 70px;
+
+    .item {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      max-width: 240px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 5px rgba(100, 100, 100, .8);
+      margin: 0 10px;
+      background-color: #232324;
+
+      svg {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+
+  .btn {
+    width: 220px;
+    margin: 0 auto;
+    display: block;
+  }
+}

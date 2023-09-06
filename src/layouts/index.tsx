@@ -4,7 +4,7 @@ import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
 
 import Search from '@/components/Search';
-import { IconSettings } from '@arco-design/web-react/icon';
+import { IconDown, IconSettings } from '@arco-design/web-react/icon';
 import { useEffect, useState } from 'react';
 
 const MenuItem = Menu.Item;
@@ -15,7 +15,7 @@ export default function LayoutComponent() {
   const selectedKeys = [location.pathname || '/'];
 
   const { userInfo, runLogin, logout } = useModel('userModel');
-  const { projects, runQueryProject } = useModel('projectModel');
+  const { projects, project, updateProject, runQueryProject } = useModel('projectModel');
 
   // 自动登录
   useEffect(() => {
@@ -37,14 +37,44 @@ export default function LayoutComponent() {
     </Menu>
   );
 
+  const projectList = (
+    <Menu>
+      {projects.list.map((item) => {
+        return (
+          <Menu.Item
+            key={item.id}
+            onClick={() => {
+              updateProject(item);
+            }}
+          >
+            {item.name}
+          </Menu.Item>
+        );
+      })}
+    </Menu>
+  );
+
   return (
     <div className={styles['layout']}>
       <div className={styles['header']}>
         <div style={{ flexGrow: 0, fontWeight: 500, fontSize: 26 }}>AeGPT</div>
+        <Dropdown droplist={projectList} trigger="click">
+          <div className={styles['project-select']}>
+            <span>{project?.name}</span>
+            <IconDown />
+          </div>
+        </Dropdown>
+
         <div className={styles.right}>
           <Menu
             mode="horizontal"
-            style={{ background: 'transparent', maxWidth: 300, height: 58, flexBasis: 300 }}
+            style={{
+              background: 'transparent',
+              maxWidth: 300,
+              height: 58,
+              flexBasis: 300,
+              minWidth: 140
+            }}
             selectedKeys={selectedKeys}
           >
             <MenuItem key="/">
@@ -73,7 +103,7 @@ export default function LayoutComponent() {
           </Space>
         </div>
       </div>
-      <div style={{ position: 'relative', height: '100%' }}>
+      <div style={{ position: 'relative', height: 'calc(100% - 48px)', overflow: 'auto' }}>
         <Outlet />
       </div>
     </div>

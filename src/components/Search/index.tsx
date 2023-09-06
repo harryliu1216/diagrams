@@ -36,7 +36,7 @@ function Search() {
     <>
       <Input
         prefix={<IconSearch />}
-        style={{ maxWidth: 550, width: '100%', marginTop: 3 }}
+        style={{ maxWidth: 550, width: '100%', marginTop: 3, marginRight: 10 }}
         allowClear
         placeholder="Search"
         size="large"

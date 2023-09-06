@@ -4,6 +4,7 @@ export default defineConfig({
   routes: [
     { path: '/login', component: 'login/index', layout: false },
     { path: '/home', component: 'project/index', layout: false },
+    { path: '/import', component: 'import/index' },
     { path: '/', component: 'table/index' },
     { path: '/strategy', component: 'strategy/index' },
     { path: '/workflow', component: 'workflow/index' },
