@@ -1,5 +1,5 @@
-import { Layout, Input, Collapse, Divider, Menu } from '@arco-design/web-react';
-import { useCallback, useContext, useRef, useState } from 'react';
+import { Layout, Button, Message } from '@arco-design/web-react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import ReactFlow, {
   Background,
   Controls,
@@ -9,25 +9,42 @@ import ReactFlow, {
 } from 'reactflow';
 import styles from './index.less';
 import CustomNode from './components/CustomNode';
-import { IconDragArrow } from '@arco-design/web-react/icon';
 import NodeSider from './components/NodeSider';
+import { useLocation, useModel, history } from 'umi';
+import queryString from 'query-string';
 
 const Sider = Layout.Sider;
-const InputSearch = Input.Search;
-const CollapseItem = Collapse.Item;
-
-const MenuItem = Menu.Item;
-const SubMenu = Menu.SubMenu;
 
 export default function WorkflowEditPage() {
   const reactFlowWrapper = useRef(null);
-
+  const { runSaveWorkflowAsync, runQueryWorkflow, runQueryDetailAsync } = useModel('workflowModel');
+  const { project } = useModel('projectModel');
+  const location = useLocation();
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
 
   const [nodeTypes, setNodeTypes] = useState({
     customNode: CustomNode
   });
+
+  const [originData, updateOriginData] = useState();
+
+  const query = queryString.parse(location.search);
+  const { id } = query;
+
+  useEffect(() => {
+    if (id) {
+      runQueryDetailAsync(id).then((res) => {
+        if (res.code == 0) {
+          if (res.data) {
+            updateOriginData(res.data);
+            setEdges(res.data.edges);
+            setNodes(res.data.nodes);
+          }
+        }
+      });
+    }
+  }, [location]);
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
@@ -124,10 +141,25 @@ export default function WorkflowEditPage() {
     console.log('setDirty');
   };
 
+  const handleClick = async () => {
+    let { code, data, msg } = await runSaveWorkflowAsync(project.id, 'test', nodes, edges, id);
+
+    if (code == 0) {
+      runQueryWorkflow(project.id);
+      Message.success(id ? '保存成功' : '新建成功');
+      history.replace('/workflow');
+    } else {
+      Message.error(msg);
+    }
+  };
+
   return (
     <Layout style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
       <Sider className={styles.slider}>
         <NodeSider></NodeSider>
+        <Button type="primary" className={styles['submit']} onClick={handleClick}>
+          保存
+        </Button>
       </Sider>
       <Layout>
         <div

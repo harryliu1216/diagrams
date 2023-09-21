@@ -73,6 +73,11 @@ request.interceptors.request.use((url, options) => {
 // @ts-ignore
 request.interceptors.response.use(async (response) => {
   const data = await response.clone().json();
+  if (data.code == 401 && location.pathname !== '/login') {
+    window.location.href =
+      '/login?fromUrl=' + decodeURIComponent(location.pathname);
+  }
+
   // response 拦截
   if (response.status === 403) {
     if (data.code === 1004) {

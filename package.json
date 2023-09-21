@@ -15,6 +15,7 @@
     "ahooks": "^3.7.8",
     "jsplumb": "^2.15.6",
     "lodash": "^4.17.21",
+    "query-string": "^8.1.0",
     "reactflow": "^11.8.1",
     "tailwindcss": "^3.3.3",
     "umi": "^4.0.74",

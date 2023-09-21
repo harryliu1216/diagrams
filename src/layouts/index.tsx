@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation, useModel } from 'umi';
+import { Link, Outlet, useLocation, useModel, history } from 'umi';
 import { Menu, Avatar, Input, Space, Button, Form, Modal, Dropdown } from '@arco-design/web-react';
 import '@arco-design/web-react/dist/css/arco.css';
 import styles from './index.less';
@@ -16,11 +16,6 @@ export default function LayoutComponent() {
 
   const { userInfo, runLogin, logout } = useModel('userModel');
   const { projects, project, updateProject, runQueryProject } = useModel('projectModel');
-
-  // 自动登录
-  useEffect(() => {
-    // runLogin('test', '123456');
-  }, []);
 
   useEffect(() => {
     console.log(userInfo);
@@ -95,7 +90,14 @@ export default function LayoutComponent() {
           </Menu>
           <Search />
           <Space size={'medium'} align="center">
-            <Button type="primary">导入</Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                history.replace({ pathname: '/import' });
+              }}
+            >
+              导入
+            </Button>
             <IconSettings style={{ fontSize: 18, verticalAlign: 'middle', cursor: 'pointer' }} />
             <Dropdown droplist={dropList}>
               <Avatar size={32}>A</Avatar>

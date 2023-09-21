@@ -1,3 +1,33 @@
-.card-list {
+.list-container {
   display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+  box-sizing: border-box;
+
+  .list {
+    overflow-y: auto;
+  }
+
+  .list::-webkit-scrollbar {
+    height: 1rem;
+    width: .5rem;
+  }
+
+  .list::-webkit-scrollbar-thumb {
+    background-color: rgba(217, 217, 227, .5);
+    border-color: #fff;
+    border-radius: 10px;
+    border-width: 1px;
+    opacity: 1;
+  }
+
+  .list::-webkit-scrollbar-track {
+    background-color: gba(217, 217, 227, .3);
+    border-radius: 10px;
+  }
+
+  .card {
+    margin-bottom: 12px;
+  }
 }

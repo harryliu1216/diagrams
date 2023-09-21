@@ -7,7 +7,7 @@ import { useModel } from 'umi';
 
 export default function globalModel() {
   const [projects, updateProjects] = useState<IListResponse<AnyObject>>({ page: 1, pageSize: 10, list: [] })
-  const [project, updateProject] = useState<AnyObject>()
+  const [project, updateProject] = useState<AnyObject>({})
   const { userInfo } = useModel('userModel')
 
   useEffect(() => {

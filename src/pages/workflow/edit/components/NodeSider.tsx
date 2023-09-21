@@ -118,7 +118,7 @@ const nodes = [
 ];
 
 export default () => (
-  <>
+  <div className={styles['wrap']}>
     <InputSearch allowClear placeholder="搜索节点" style={{ width: '100%', marginBottom: 16 }} />
     <Menu>
       {nodes.map((node, index) => {
@@ -138,5 +138,5 @@ export default () => (
         );
       })}
     </Menu>
-  </>
+  </div>
 );

@@ -37,7 +37,6 @@ const getFormController = ({ type, attribute }) => {
 export default function CustomNode({ data }: { data: NodeData }) {
   const { onCopy, onDelete, onShowInfo, onConnect, onExpand } = data;
   const { title, fields } = data.data;
-  console.log(data.data);
   return (
     <div className={styles['node-wrapper']}>
       <Handle type="target" position={Position.Left} onConnect={onConnect} />
@@ -50,7 +49,11 @@ export default function CustomNode({ data }: { data: NodeData }) {
           {fields && (
             <Form autoComplete="off" layout="vertical">
               {fields.map((item) => {
-                return <FormItem label={item.label}>{getFormController(item)}</FormItem>;
+                return (
+                  <FormItem key={item.label} label={item.label}>
+                    {getFormController(item)}
+                  </FormItem>
+                );
               })}
             </Form>
           )}
